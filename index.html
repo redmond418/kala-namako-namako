@@ -1,0 +1,91 @@
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>ナマコ</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Dela+Gothic+One&display=swap" rel="stylesheet">
+        <style type="text/css">
+            .dela-gothic-one-regular {
+                font-family: "Dela Gothic One", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+            }
+            .background {
+                position: fixed;
+                background-color: rgb(121, 153, 153);
+                width: 100vw;
+                height: 100vh;
+                top: 0;
+                left: 0;
+            }
+            h1 {
+                user-select: none;
+                font-size: 60vw;
+                color: rgb(158, 198, 198);
+                transform: scale(0.25, 1);
+                left: -150vw;
+                position: absolute;
+                margin: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                width: 400vw;
+                text-align: center;
+                align-items: center;
+            }
+            #bgText {
+                transition: transform 0.3s ease;
+            }
+            img.namako {
+                width: 40%;
+                position: fixed;
+                left: calc(50% - 20%);
+                top: calc(50% - 31.08%);
+                animation: namakoPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0s;
+            }
+            @keyframes namakoPop {
+                0% {
+                    transform: scale(0);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="background">
+            <h1 class="dela-gothic-one-regular" id="bgText"></h1>
+            <div id="namakos">
+                <!-- <img src="nettaigyo_namako.png" class="namako"> -->
+            </div>
+        </div>
+        <script>
+            let count = 0;
+            
+            document.body.onclick = namakoIncrease;
+
+            function namakoIncrease() {
+                const textElement = document.getElementById('bgText');
+                count++;
+                textElement.textContent = 'ナ'.repeat(count) + 'マコ';
+                const length = (count + 2) * 0.8;
+                textElement.style.transform = `scale(${1 / length}, 1)`;
+                textElement.style.width = (length * 100) + 'vw';
+                textElement.style.left = (-length * 50 + 50) + 'vw';
+
+                const containerElement = document.getElementById('namakos');
+                let namakoObject = document.createElement('img');
+                namakoObject.setAttribute('src', "nettaigyo_namako.png");
+                namakoObject.setAttribute('class', "namako");
+                if(count > 1) {
+                    namakoObject.style.left = (Math.random() * 100 - 20) + '%';
+                    namakoObject.style.top = (Math.random() * 100 - 31.08) + '%';
+                }
+                containerElement.append(namakoObject);
+            }
+        </script>
+    </body>
+</html>
